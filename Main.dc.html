@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CMS Redaksi — versi PC</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,600;6..72,700&amp;family=Public+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+html,body{height:100%}
+body{margin:0;background:#EFE9DC}
+a{color:#1F4E79}a:hover{color:#163A5A}
+button{font-family:inherit}
+</style>
+</helmet>
+<div style="width: 100%; height: 100vh; height: 100dvh; min-width: 1000px; min-height: 600px; position: relative; box-sizing: border-box; background: #EFE9DC; font-family: 'Public Sans', system-ui, sans-serif; color: #1D1A15; display: flex; flex-direction: column; overflow: hidden">
+
+  <!-- Bar atas -->
+  <div style="height: 64px; flex-shrink: 0; box-sizing: border-box; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; background: #1D1A15; color: #F4EEE2">
+    <div style="display: flex; align-items: center; gap: 14px">
+      <div style="font-family: 'Newsreader', Georgia, serif; font-size: 24px; font-weight: 700">Warta Sukamaju</div>
+      <div style="font-size: 12px; font-weight: 700; letter-spacing: 1px; padding: 3px 8px; border: 1px solid #5A5346; border-radius: 4px; color: #CFC4AE">CMS REDAKSI</div>
+    </div>
+    <div style="display: flex; align-items: center; gap: clamp(14px, 1.8vw, 26px)">
+      <div style="display: flex; flex-direction: column; gap: 4px; width: clamp(110px, 10vw, 150px)">
+        <div style="display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; color: #CFC4AE"><span>Kredibilitas</span><span style="color: #F4EEE2">{{kred}}</span></div>
+        <div style="height: 6px; background: #3A352C; border-radius: 3px; overflow: hidden"><div style="{{kredBar}}"></div></div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 4px; width: clamp(110px, 10vw, 150px)">
+        <div style="display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; color: #CFC4AE"><span>Trafik</span><span style="color: #F4EEE2">{{trafik}}</span></div>
+        <div style="height: 6px; background: #3A352C; border-radius: 3px; overflow: hidden"><div style="{{trafikBar}}"></div></div>
+      </div>
+      <div style="font-size: 13px; color: #CFC4AE">Kas <b style="color: #F4EEE2">Rp [KAS]</b></div>
+      <div style="display: flex; align-items: center; gap: 8px; padding: 7px 12px; border: 1px solid #4A443A; border-radius: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 14px">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F2D19B" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+        10.40 <span style="color: #CFC4AE">/ tenggat 12.00</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="flex-grow: 1; min-height: 0; display: flex">
+    <!-- Menu samping -->
+    <div style="width: clamp(190px, 16vw, 232px); flex-shrink: 0; box-sizing: border-box; padding: 20px 14px; background: #F7F2E8; border-right: 1px solid #D8CDB6; display: flex; flex-direction: column; gap: 4px">
+      <div style="font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #5E5648; padding: 0 14px 8px">Hari 1 · Pasal 1 &amp; 4</div>
+      <sc-for list="{{navItems}}" as="n" hint-placeholder-count="4">
+        <button type="button" onClick="{{n.pick}}" style="{{n.style}}">
+          <span>{{n.label}}</span>
+          <sc-if value="{{n.hasCount}}" hint-placeholder-val="{{ true }}"><span style="{{n.badge}}">{{n.count}}</span></sc-if>
+        </button>
+      </sc-for>
+      <div style="margin-top: auto; display: flex; gap: 10px; align-items: center; padding: 12px; border: 1px solid #D8CDB6; border-radius: 8px; background: #FBF8F1">
+        <div style="width: 40px; height: 40px; flex-shrink: 0; border-radius: 50%; overflow: hidden; background: #F2D19B"><svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true"><path d="M14 33 C12 16 22 9 32 9 C42 9 52 16 50 33 L50 41 C46 43 44 41 44 37 L20 37 C20 41 18 43 14 41 Z" fill="#4A4540"></path><path d="M8 66 C10 51 20 47 32 47 C44 47 54 51 56 66 Z" fill="#7A3B1E"></path><path d="M26 47 L32 54 L38 47" fill="none" stroke="#E6C9A8" stroke-width="2"></path><rect x="27" y="38" width="10" height="10" rx="3" fill="#B97E55"></rect><ellipse cx="32" cy="29" rx="12.5" ry="14" fill="#C98E62"></ellipse><path d="M19 27 C20 16 28 13 34 14 C40 15 45 19 45 27 C40 22 32 20 26 21 C23 22 21 24 19 27 Z" fill="#4A4540"></path><path d="M30 14.5 C33 15.5 36 17.5 38 21.5" stroke="#AFA89F" stroke-width="2" fill="none" stroke-linecap="round"></path><circle cx="26.5" cy="29.5" r="1.4" fill="#2B2620"></circle><circle cx="37.5" cy="29.5" r="1.4" fill="#2B2620"></circle><path d="M23 24.6 Q26.5 23 30 24.6 M34 24.6 Q37.5 23 41 24.6" stroke="#3A342E" stroke-width="1.5" fill="none" stroke-linecap="round"></path><path d="M27.5 36 Q32 39.6 36.5 36" stroke="#6B3A2A" stroke-width="1.7" fill="none" stroke-linecap="round"></path><circle cx="26.5" cy="29.5" r="4.3" fill="none" stroke="#2B2620" stroke-width="1.3"></circle><circle cx="37.5" cy="29.5" r="4.3" fill="none" stroke="#2B2620" stroke-width="1.3"></circle><path d="M30.8 29.5 H33.2" stroke="#2B2620" stroke-width="1.3"></path></svg></div>
+        <div style="font-size: 13px; line-height: 1.35"><b>Bu Ratih</b><br><span style="color: #5E5648">Redaktur senior</span></div>
+      </div>
+    </div>
+
+    <!-- Area utama -->
+    <div style="flex-grow: 1; min-width: 0; min-height: 0; display: flex; flex-direction: column">
+
+      <sc-if value="{{isInbox}}" hint-placeholder-val="{{ true }}">
+        <div style="flex-grow: 1; overflow-y: auto; padding: 28px 32px; box-sizing: border-box; display: flex; flex-direction: column; gap: 12px">
+          <div style="font-family: 'Newsreader', Georgia, serif; font-size: 30px; font-weight: 700">Naskah masuk</div>
+          <div style="font-size: 15px; color: #5E5648; margin-bottom: 6px">Buka naskah untuk menyunting, lalu putuskan: publish, pending, atau tolak.</div>
+          <sc-for list="{{inboxItems}}" as="it" hint-placeholder-count="3">
+            <button type="button" onClick="{{it.pick}}" style="display: flex; flex-direction: column; gap: 6px; width: 100%; max-width: 860px; text-align: left; padding: 18px 20px; background: #FFFFFF; border: 1px solid #D8CDB6; border-radius: 6px; cursor: pointer; color: #1D1A15">
+              <span style="font-family: 'Newsreader', Georgia, serif; font-size: 21px; font-weight: 700; line-height: 1.25">{{it.title}}</span>
+              <span style="font-size: 14px; color: #5E5648">{{it.meta}}</span>
+            </button>
+          </sc-for>
+          <sc-if value="{{noInbox}}" hint-placeholder-val="{{ false }}">
+            <div style="font-size: 15px; color: #5E5648">Semua naskah hari ini sudah diputuskan.</div>
+          </sc-if>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{isEditor}}" hint-placeholder-val="{{ false }}">
+        <div style="flex-grow: 1; min-height: 0; display: flex; gap: 20px; padding: 20px 24px; box-sizing: border-box">
+          <!-- Editor -->
+          <div style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: 12px; min-height: 0">
+            <div style="display: flex; align-items: center; gap: 12px">
+              <button type="button" onClick="{{backToList}}" style="min-height: 40px; padding: 0 14px; background: transparent; border: 1px solid #9C8A63; border-radius: 6px; font-size: 14px; font-weight: 600; color: #1D1A15; cursor: pointer">← Kembali</button>
+              <div style="font-size: 14px; color: #5E5648">Sunting naskah · klik bagian bergaris titik-titik untuk memeriksa dan mengganti teksnya</div>
+            </div>
+            <div style="flex-grow: 1; min-height: 0; overflow-y: auto; background: #FFFFFF; border: 1px solid #D8CDB6; border-radius: 6px; padding: 24px 28px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px">
+              <div>
+                <div style="font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #5E5648; margin-bottom: 6px">Judul</div>
+                <div style="padding: 12px 14px; border: 1px solid #D8CDB6; border-radius: 4px; background: #FDFBF6; font-family: 'Newsreader', Georgia, serif; font-size: 26px; font-weight: 700; line-height: 1.25">{{edTitle}}</div>
+              </div>
+              <div>
+                <div style="font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #5E5648; margin-bottom: 6px">Isi berita</div>
+                <div style="padding: 16px 18px; border: 1px solid #D8CDB6; border-radius: 4px; background: #FDFBF6; font-family: 'Newsreader', Georgia, serif; font-size: 18px; line-height: 1.7">
+                  <sc-if value="{{isN1}}" hint-placeholder-val="{{ true }}">
+                    <p style="margin: 0 0 14px"><b>SUKAMAJU, <button type="button" onClick="{{tapHari}}" style="{{sHari}}">{{tHari}}</button></b> — Kasus demam berdarah dengue (DBD) di Kota Sukamaju tercatat <button type="button" onClick="{{tapAngka}}" style="{{sAngka}}">{{tAngka}}</button> sepanjang September, naik dari 52 kasus pada Agustus.</p>
+                    <p style="margin: 0 0 14px"><button type="button" onClick="{{tapJabatan}}" style="{{sJabatan}}">{{tJabatan}}</button> Kota Sukamaju, dr. Ratna Kusumawati, mengimbau warga menguras, menutup, dan mendaur ulang barang bekas (3M).</p>
+                    <p style="margin: 0">“Musim hujan datang lebih awal. Jentik nyamuk berkembang cepat di genangan air,” katanya dalam jumpa pers.</p>
+                  </sc-if>
+                  <sc-if value="{{isN4}}" hint-placeholder-val="{{ false }}">
+                    <p style="margin: 0 0 14px"><b>SUKAMAJU</b> — Pemerintah Kota Sukamaju membuka pendaftaran Beasiswa Sukamaju Cerdas untuk <button type="button" onClick="{{tapKuota}}" style="{{sKuota}}">{{tKuota}}</button> warga kota. Pendaftaran dibuka mulai 13 hingga 30 Oktober melalui laman resmi pemkot.</p>
+                    <p style="margin: 0 0 14px">Kepala Dinas Pendidikan Kota Sukamaju, Hendra Wiratama, mengatakan beasiswa diprioritaskan bagi mahasiswa dari keluarga kurang mampu. “Kami ingin tidak ada anak Sukamaju yang putus kuliah karena biaya,” ujarnya.</p>
+                    <p style="margin: 0">Setiap penerima akan mendapat bantuan <button type="button" onClick="{{tapNominal}}" style="{{sNominal}}">{{tNominal}}</button> selama dua semester.</p>
+                  </sc-if>
+                  <sc-if value="{{isN5}}" hint-placeholder-val="{{ false }}">
+                    <p style="margin: 0 0 14px"><b>SUKAMAJU</b> — Jembatan Kali Asri akan ditutup total mulai besok pagi untuk perbaikan. Pengendara diminta memutar lewat Jalan Merdeka selama perbaikan berlangsung.</p>
+                    <p style="margin: 0">Menurut warga sekitar, retakan di badan jembatan sudah terlihat sejak musim hujan tahun lalu.</p>
+                  </sc-if>
+                </div>
+              </div>
+              <div style="font-size: 14px; color: #5E5648">Penulis: {{edFrom}} · Rubrik: {{edRubrik}}</div>
+            </div>
+          </div>
+
+          <!-- Kolom kanan -->
+          <div style="width: clamp(320px, 30vw, 420px); flex-shrink: 0; display: flex; flex-direction: column; gap: 14px; min-height: 0; overflow-y: auto">
+            <div style="background: #FFFFFF; border: 1px solid #D8CDB6; border-radius: 6px; padding: 16px 18px; display: flex; flex-direction: column; gap: 10px">
+              <div style="display: flex; justify-content: space-between; align-items: center">
+                <div style="font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #5E5648">Publikasi</div>
+                <div style="font-size: 13px; font-weight: 600; padding: 2px 10px; border-radius: 10px; background: #EFE9DC">{{statusLabel}}</div>
+              </div>
+              <button type="button" onClick="{{doPublish}}" style="min-height: 48px; background: #2D6A3E; color: #FFFFFF; border: none; border-radius: 6px; font-size: 15px; font-weight: 700; letter-spacing: 1px; cursor: pointer">PUBLISH</button>
+              <div style="display: flex; gap: 10px">
+                <button type="button" onClick="{{doPending}}" style="flex: 1; min-height: 44px; background: #FFFFFF; color: #8F4D10; border: 2px solid #8F4D10; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer">PENDING</button>
+                <button type="button" onClick="{{doTolak}}" style="flex: 1; min-height: 44px; background: #FFFFFF; color: #9E2B25; border: 2px solid #9E2B25; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer">TOLAK</button>
+              </div>
+              <div style="font-size: 13px; color: #5E5648; line-height: 1.4">Pending menyimpan naskah ke File untuk diputuskan nanti.</div>
+            </div>
+
+            <sc-if value="{{hasPop}}" hint-placeholder-val="{{ false }}">
+              <div style="background: #FFFFFF; border: 2px solid #1F4E79; border-radius: 6px; padding: 14px 16px; display: flex; flex-direction: column; gap: 8px">
+                <div style="font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #1F4E79">Sunting: {{popPrompt}}</div>
+                <sc-for list="{{popOptions}}" as="o" hint-placeholder-count="3">
+                  <button type="button" onClick="{{o.pick}}" style="{{o.style}}">
+                    <span style="{{o.dot}}"></span>
+                    <span style="display: flex; flex-direction: column"><span style="font-size: 15px; font-weight: 600">{{o.t}}</span><span style="font-size: 12px; color: #5E5648">{{o.sub}}</span></span>
+                  </button>
+                </sc-for>
+                <button type="button" onClick="{{closePop}}" style="align-self: flex-start; min-height: 40px; padding: 0 14px; background: #1D1A15; color: #FBF8F1; border: none; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer">Selesai</button>
+              </div>
+            </sc-if>
+
+            <div style="flex-grow: 1; min-height: 240px; display: flex; flex-direction: column; gap: 8px">
+              <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap">
+                <div style="font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #5E5648; margin-right: 4px">Lampiran</div>
+                <sc-for list="{{docTabs}}" as="d" hint-placeholder-count="2">
+                  <button type="button" onClick="{{d.pick}}" style="{{d.style}}">{{d.label}}</button>
+                </sc-for>
+              </div>
+              <div style="flex-grow: 1; min-height: 0; overflow-y: auto; background: #FFFFFF; border: 1px solid #D8CDB6; border-radius: 6px; padding: 18px 20px; box-sizing: border-box">
+                <sc-if value="{{isDocRilis}}" hint-placeholder-val="{{ true }}">
+                  <div style="font-family: 'Newsreader', Georgia, serif">
+                    <div style="text-align: center; padding-bottom: 10px; border-bottom: 3px double #1D1A15">
+                      <div style="font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: #5E5648">Pemerintah Kota Sukamaju</div>
+                      <div style="font-size: 17px; font-weight: 700">DINAS KESEHATAN</div>
+                    </div>
+                    <div style="margin: 12px 0 8px; font-size: 15px; font-weight: 700">Undangan &amp; Ringkasan Jumpa Pers</div>
+                    <div style="font-size: 15px; line-height: 1.65">Waktu: Selasa, 13 Oktober, pukul 10.00<br>Pembicara: dr. Ratna Kusumawati<br><br>Data DBD: Agustus 52 kasus, September 87 kasus.</div>
+                  </div>
+                </sc-if>
+                <sc-if value="{{isDocProfil}}" hint-placeholder-val="{{ false }}">
+                  <div style="display: flex; flex-direction: column; gap: 12px; font-size: 15px">
+                    <div><div style="font-size: 12px; color: #4B5563">Nama</div><div style="font-weight: 600">dr. Ratna Kusumawati</div></div>
+                    <div><div style="font-size: 12px; color: #4B5563">Jabatan</div><div style="font-weight: 600">Sekretaris Dinas Kesehatan Kota Sukamaju</div></div>
+                    <div><div style="font-size: 12px; color: #4B5563">Catatan</div><div>Kepala Dinas Kesehatan saat ini dijabat drg. Bambang Setiadi.</div></div>
+                  </div>
+                </sc-if>
+                <sc-if value="{{isDocSiaran}}" hint-placeholder-val="{{ false }}">
+                  <div style="font-family: 'Newsreader', Georgia, serif">
+                    <div style="text-align: center; padding-bottom: 10px; border-bottom: 3px double #1D1A15">
+                      <div style="font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: #5E5648">Pemerintah Kota Sukamaju</div>
+                      <div style="font-size: 17px; font-weight: 700">DINAS PENDIDIKAN</div>
+                    </div>
+                    <div style="margin: 12px 0 8px; font-size: 15px; font-weight: 700">Siaran Pers Nomor 045/Disdik/X</div>
+                    <div style="font-size: 15px; line-height: 1.65">Pendaftaran Beasiswa Sukamaju Cerdas dibuka 13–30 Oktober untuk 500 mahasiswa ber-KTP Sukamaju, dengan prioritas keluarga kurang mampu. Besaran bantuan Rp6.000.000 per semester selama dua semester. Narasumber: Hendra Wiratama, Kepala Dinas Pendidikan.</div>
+                  </div>
+                </sc-if>
+                <sc-if value="{{isDocChat}}" hint-placeholder-val="{{ false }}">
+                  <div style="display: flex; flex-direction: column; gap: 8px; font-size: 14px; line-height: 1.5">
+                    <div style="align-self: flex-end; max-width: 85%; background: #DCE8F4; border-radius: 10px 10px 2px 10px; padding: 8px 12px">Pak, benar Jembatan Kali Asri ditutup mulai besok?</div>
+                    <div style="font-size: 12px; color: #5E5648">Humas Dishub Kota Sukamaju</div>
+                    <div style="align-self: flex-start; max-width: 85%; background: #F1ECE1; border-radius: 10px 10px 10px 2px; padding: 8px 12px">Rencananya memang ada perbaikan, Mas. Tapi tanggal pastinya belum final. Kami kabari sore ini, ya.</div>
+                  </div>
+                </sc-if>
+              </div>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{isFile}}" hint-placeholder-val="{{ false }}">
+        <div style="flex-grow: 1; overflow-y: auto; padding: 28px 32px; box-sizing: border-box; display: flex; flex-direction: column; gap: 12px">
+          <div style="font-family: 'Newsreader', Georgia, serif; font-size: 30px; font-weight: 700">File</div>
+          <div style="font-size: 15px; color: #5E5648; margin-bottom: 6px">Naskah yang ditahan untuk diputuskan nanti. {{fileCount}}.</div>
+          <sc-for list="{{fileItems}}" as="it" hint-placeholder-count="2">
+            <div style="display: flex; align-items: center; gap: 16px; max-width: 860px; padding: 16px 20px; background: #FFFFFF; border: 1px solid #D8CDB6; border-radius: 6px">
+              <div style="flex-grow: 1; display: flex; flex-direction: column; gap: 4px">
+                <span style="font-family: 'Newsreader', Georgia, serif; font-size: 20px; font-weight: 700">{{it.title}}</span>
+                <span style="font-size: 14px; color: #5E5648">{{it.meta}}</span>
+              </div>
+              <sc-if value="{{it.canOpen}}" hint-placeholder-val="{{ true }}">
+                <button type="button" onClick="{{it.open}}" style="min-height: 44px; padding: 0 16px; background: #1F4E79; color: #FFFFFF; border: none; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer">Buka</button>
+              </sc-if>
+              <button type="button" onClick="{{it.drop}}" style="min-height: 44px; padding: 0 16px; background: transparent; color: #9E2B25; border: 1px solid #9E2B25; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer">Buang</button>
+            </div>
+          </sc-for>
+          <sc-if value="{{noFile}}" hint-placeholder-val="{{ false }}">
+            <div style="font-size: 15px; color: #5E5648">File kosong.</div>
+          </sc-if>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{isEmail}}" hint-placeholder-val="{{ false }}">
+        <div style="flex-grow: 1; overflow-y: auto; padding: 28px 32px; box-sizing: border-box; display: flex; flex-direction: column; gap: 10px; max-width: 924px">
+          <div style="font-family: 'Newsreader', Georgia, serif; font-size: 30px; font-weight: 700; margin-bottom: 8px">Email</div>
+          <sc-for list="{{emailItems}}" as="m" hint-placeholder-count="2">
+            <button type="button" onClick="{{m.pick}}" style="{{m.style}}"><sc-if value="{{m.isBapak}}" hint-placeholder-val="{{ true }}"><div style="width: 40px; height: 40px; flex-shrink: 0; border-radius: 50%; overflow: hidden; background: #DCE8F4"><svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true"><path d="M8 66 C10 51 20 47 32 47 C44 47 54 51 56 66 Z" fill="#2F5D7C"></path><path d="M14 58 L20 52 M24 60 L28 54 M40 56 L44 52 M46 60 L50 55" stroke="#A9C3D6" stroke-width="2" stroke-linecap="round"></path><rect x="27" y="38" width="10" height="10" rx="3" fill="#A56D42"></rect><ellipse cx="32" cy="30" rx="12" ry="13.5" fill="#B87A4B"></ellipse><path d="M20.3 23 Q19.4 28 21 32 M43.7 23 Q44.6 28 43 32" stroke="#C9C3BA" stroke-width="3" fill="none" stroke-linecap="round"></path><path d="M19.6 21.5 L21 12.5 Q32 9.5 43 12.5 L44.4 21.5 Q32 18.6 19.6 21.5 Z" fill="#1D1A15"></path><circle cx="26.5" cy="29.5" r="1.4" fill="#2B2620"></circle><circle cx="37.5" cy="29.5" r="1.4" fill="#2B2620"></circle><path d="M23 24.6 Q26.5 23 30 24.6 M34 24.6 Q37.5 23 41 24.6" stroke="#3A342E" stroke-width="1.5" fill="none" stroke-linecap="round"></path><path d="M27.5 36 Q32 39.6 36.5 36" stroke="#6B3A2A" stroke-width="1.7" fill="none" stroke-linecap="round"></path><path d="M26.8 34.6 Q32 32.2 37.2 34.6" stroke="#D8D2C8" stroke-width="2.6" fill="none" stroke-linecap="round"></path></svg></div></sc-if><sc-if value="{{m.isDinkes}}" hint-placeholder-val="{{ false }}"><div style="width: 40px; height: 40px; flex-shrink: 0; border-radius: 50%; overflow: hidden; background: #E4EEDF"><svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true"><path d="M12 66 C10 44 15 14 32 11 C49 14 54 44 52 66 Z" fill="#3E7C6B"></path><path d="M20 44 Q32 52 44 44" stroke="#35695B" stroke-width="2" fill="none"></path><ellipse cx="32" cy="30" rx="10.8" ry="12.6" fill="#C99064"></ellipse><path d="M21.5 25 Q24 16 32 16 Q40 16 42.5 25 Q38 20 32 20 Q26 20 21.5 25 Z" fill="#35695B"></path><circle cx="26.5" cy="29.6" r="1.6" fill="#2B2620"></circle><circle cx="37.5" cy="29.6" r="1.6" fill="#2B2620"></circle><path d="M23 25.2 Q26 24 29.6 22.6 M34.4 22.6 Q38 24 41 25.2" stroke="#3A342E" stroke-width="1.5" fill="none" stroke-linecap="round"></path><ellipse cx="32" cy="37.2" rx="2.1" ry="1.7" fill="#6B3A2A"></ellipse><path d="M45 19 Q47.4 23.4 45 25 Q42.6 23.4 45 19 Z" fill="#8FC1E3"></path></svg></div></sc-if><sc-if value="{{m.isDisdik}}" hint-placeholder-val="{{ false }}"><div style="width: 40px; height: 40px; flex-shrink: 0; border-radius: 50%; overflow: hidden; background: #EAF1F8"><svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true"><path d="M8 66 C10 51 20 47 32 47 C44 47 54 51 56 66 Z" fill="#9C8A5E"></path><path d="M27 47 L32 53 L37 47" fill="none" stroke="#7D6E47" stroke-width="2"></path><rect x="27" y="38" width="10" height="10" rx="3" fill="#BC8D68"></rect><ellipse cx="32" cy="29.5" rx="12" ry="13.5" fill="#D0A07A"></ellipse><path d="M20 26 C19 15 26 12 32 12 C39 12 45 15 44 26 C41 20 36 18 32 18 C27 18 23 20 20 26 Z" fill="#22201D"></path><circle cx="26.5" cy="29.8" r="1.4" fill="#2B2620"></circle><circle cx="37.5" cy="29.8" r="1.4" fill="#2B2620"></circle><path d="M23 23.8 L29.8 25.8 M34.2 25.8 L41 23.8" stroke="#2B2620" stroke-width="1.7" fill="none" stroke-linecap="round"></path><path d="M28 37.4 H36" stroke="#6B3A2A" stroke-width="1.8" stroke-linecap="round"></path><rect x="22.6" y="26.4" width="7.8" height="6" rx="1.5" fill="none" stroke="#2B2620" stroke-width="1.3"></rect><rect x="33.6" y="26.4" width="7.8" height="6" rx="1.5" fill="none" stroke="#2B2620" stroke-width="1.3"></rect><path d="M30.4 29.4 H33.6" stroke="#2B2620" stroke-width="1.3"></path></svg></div></sc-if><sc-if value="{{m.isDishub}}" hint-placeholder-val="{{ false }}"><div style="width: 40px; height: 40px; flex-shrink: 0; border-radius: 50%; overflow: hidden; background: #E8E4F0"><svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true"><path d="M8 66 C10 51 20 47 32 47 C44 47 54 51 56 66 Z" fill="#3D5A80"></path><rect x="38" y="54" width="8" height="4" rx="1" fill="#F2D19B"></rect><rect x="27" y="38" width="10" height="10" rx="3" fill="#94613D"></rect><ellipse cx="32" cy="30" rx="12" ry="13.5" fill="#A8714A"></ellipse><path d="M19 22 Q20 11 32 11 Q44 11 45 22 Z" fill="#3D5A80"></path><path d="M17 22 H47" stroke="#2C4460" stroke-width="3" stroke-linecap="round"></path><circle cx="26.5" cy="29.8" r="1.4" fill="#2B2620"></circle><circle cx="37.5" cy="29.8" r="1.4" fill="#2B2620"></circle><path d="M23 23.8 L29.8 25.8 M34.2 25.8 L41 23.8" stroke="#2B2620" stroke-width="1.7" fill="none" stroke-linecap="round"></path><path d="M28 37.4 H36" stroke="#6B3A2A" stroke-width="1.8" stroke-linecap="round"></path></svg></div></sc-if><span style="display: flex; flex-direction: column; gap: 3px"><span style="font-size: 13px; color: #5E5648">{{m.from}}</span><span style="{{m.subjStyle}}">{{m.subject}}</span></span></button>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{isEmailRead}}" hint-placeholder-val="{{ false }}">
+        <div style="flex-grow: 1; overflow-y: auto; padding: 28px 32px; box-sizing: border-box; display: flex; flex-direction: column; gap: 14px; max-width: 924px">
+          <button type="button" onClick="{{backToEmail}}" style="align-self: flex-start; min-height: 40px; padding: 0 14px; background: transparent; border: 1px solid #9C8A63; border-radius: 6px; font-size: 14px; font-weight: 600; color: #1D1A15; cursor: pointer">← Semua email</button>
+          <div style="background: #FFFFFF; border: 1px solid #D8CDB6; border-radius: 6px; padding: 24px 28px; display: flex; flex-direction: column; gap: 10px">
+            <div style="display: flex; align-items: center; gap: 12px"><sc-if value="{{erBapak}}" hint-placeholder-val="{{ true }}"><div style="width: 52px; height: 52px; flex-shrink: 0; border-radius: 50%; overflow: hidden; background: #DCE8F4"><svg width="52" height="52" viewBox="0 0 64 64" aria-hidden="true"><path d="M8 66 C10 51 20 47 32 47 C44 47 54 51 56 66 Z" fill="#2F5D7C"></path><path d="M14 58 L20 52 M24 60 L28 54 M40 56 L44 52 M46 60 L50 55" stroke="#A9C3D6" stroke-width="2" stroke-linecap="round"></path><rect x="27" y="38" width="10" height="10" rx="3" fill="#A56D42"></rect><ellipse cx="32" cy="30" rx="12" ry="13.5" fill="#B87A4B"></ellipse><path d="M20.3 23 Q19.4 28 21 32 M43.7 23 Q44.6 28 43 32" stroke="#C9C3BA" stroke-width="3" fill="none" stroke-linecap="round"></path><path d="M19.6 21.5 L21 12.5 Q32 9.5 43 12.5 L44.4 21.5 Q32 18.6 19.6 21.5 Z" fill="#1D1A15"></path><circle cx="26.5" cy="29.5" r="1.4" fill="#2B2620"></circle><circle cx="37.5" cy="29.5" r="1.4" fill="#2B2620"></circle><path d="M23 24.6 Q26.5 23 30 24.6 M34 24.6 Q37.5 23 41 24.6" stroke="#3A342E" stroke-width="1.5" fill="none" stroke-linecap="round"></path><path d="M27.5 36 Q32 39.6 36.5 36" stroke="#6B3A2A" stroke-width="1.7" fill="none" stroke-linecap="round"></path><path d="M26.8 34.6 Q32 32.2 37.2 34.6" stroke="#D8D2C8" stroke-width="2.6" fill="none" stroke-linecap="round"></path></svg></div></sc-if><sc-if value="{{erDinkes}}" hint-placeholder-val="{{ false }}"><div style="width: 52px; height: 52px; flex-shrink: 0; border-radius: 50%; overflow: hidden; background: #E4EEDF"><svg width="52" height="52" viewBox="0 0 64 64" aria-hidden="true"><path d="M12 66 C10 44 15 14 32 11 C49 14 54 44 52 66 Z" fill="#3E7C6B"></path><path d="M20 44 Q32 52 44 44" stroke="#35695B" stroke-width="2" fill="none"></path><ellipse cx="32" cy="30" rx="10.8" ry="12.6" fill="#C99064"></ellipse><path d="M21.5 25 Q24 16 32 16 Q40 16 42.5 25 Q38 20 32 20 Q26 20 21.5 25 Z" fill="#35695B"></path><circle cx="26.5" cy="29.6" r="1.6" fill="#2B2620"></circle><circle cx="37.5" cy="29.6" r="1.6" fill="#2B2620"></circle><path d="M23 25.2 Q26 24 29.6 22.6 M34.4 22.6 Q38 24 41 25.2" stroke="#3A342E" stroke-width="1.5" fill="none" stroke-linecap="round"></path><ellipse cx="32" cy="37.2" rx="2.1" ry="1.7" fill="#6B3A2A"></ellipse><path d="M45 19 Q47.4 23.4 45 25 Q42.6 23.4 45 19 Z" fill="#8FC1E3"></path></svg></div></sc-if><sc-if value="{{erDisdik}}" hint-placeholder-val="{{ false }}"><div style="width: 52px; height: 52px; flex-shrink: 0; border-radius: 50%; overflow: hidden; background: #EAF1F8"><svg width="52" height="52" viewBox="0 0 64 64" aria-hidden="true"><path d="M8 66 C10 51 20 47 32 47 C44 47 54 51 56 66 Z" fill="#9C8A5E"></path><path d="M27 47 L32 53 L37 47" fill="none" stroke="#7D6E47" stroke-width="2"></path><rect x="27" y="38" width="10" height="10" rx="3" fill="#BC8D68"></rect><ellipse cx="32" cy="29.5" rx="12" ry="13.5" fill="#D0A07A"></ellipse><path d="M20 26 C19 15 26 12 32 12 C39 12 45 15 44 26 C41 20 36 18 32 18 C27 18 23 20 20 26 Z" fill="#22201D"></path><circle cx="26.5" cy="29.8" r="1.4" fill="#2B2620"></circle><circle cx="37.5" cy="29.8" r="1.4" fill="#2B2620"></circle><path d="M23 23.8 L29.8 25.8 M34.2 25.8 L41 23.8" stroke="#2B2620" stroke-width="1.7" fill="none" stroke-linecap="round"></path><path d="M28 37.4 H36" stroke="#6B3A2A" stroke-width="1.8" stroke-linecap="round"></path><rect x="22.6" y="26.4" width="7.8" height="6" rx="1.5" fill="none" stroke="#2B2620" stroke-width="1.3"></rect><rect x="33.6" y="26.4" width="7.8" height="6" rx="1.5" fill="none" stroke="#2B2620" stroke-width="1.3"></rect><path d="M30.4 29.4 H33.6" stroke="#2B2620" stroke-width="1.3"></path></svg></div></sc-if><sc-if value="{{erDishub}}" hint-placeholder-val="{{ false }}"><div style="width: 52px; height: 52px; flex-shrink: 0; border-radius: 50%; overflow: hidden; background: #E8E4F0"><svg width="52" height="52" viewBox="0 0 64 64" aria-hidden="true"><path d="M8 66 C10 51 20 47 32 47 C44 47 54 51 56 66 Z" fill="#3D5A80"></path><rect x="38" y="54" width="8" height="4" rx="1" fill="#F2D19B"></rect><rect x="27" y="38" width="10" height="10" rx="3" fill="#94613D"></rect><ellipse cx="32" cy="30" rx="12" ry="13.5" fill="#A8714A"></ellipse><path d="M19 22 Q20 11 32 11 Q44 11 45 22 Z" fill="#3D5A80"></path><path d="M17 22 H47" stroke="#2C4460" stroke-width="3" stroke-linecap="round"></path><circle cx="26.5" cy="29.8" r="1.4" fill="#2B2620"></circle><circle cx="37.5" cy="29.8" r="1.4" fill="#2B2620"></circle><path d="M23 23.8 L29.8 25.8 M34.2 25.8 L41 23.8" stroke="#2B2620" stroke-width="1.7" fill="none" stroke-linecap="round"></path><path d="M28 37.4 H36" stroke="#6B3A2A" stroke-width="1.8" stroke-linecap="round"></path></svg></div></sc-if><div style="font-size: 14px; color: #5E5648">Dari: <b style="color: #1D1A15">{{emFrom}}</b></div></div>
+            <div style="font-family: 'Newsreader', Georgia, serif; font-size: 26px; font-weight: 700">{{emSubject}}</div>
+            <div style="font-size: 16px; line-height: 1.65">{{emBody}}</div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{isTerbit}}" hint-placeholder-val="{{ false }}">
+        <div style="flex-grow: 1; overflow-y: auto; padding: 28px 32px; box-sizing: border-box; display: flex; flex-direction: column; gap: 12px">
+          <div style="font-family: 'Newsreader', Georgia, serif; font-size: 30px; font-weight: 700">Terbit hari ini</div>
+          <sc-for list="{{terbitItems}}" as="it" hint-placeholder-count="1">
+            <div style="max-width: 860px; padding: 16px 20px; background: #FFFFFF; border: 1px solid #D8CDB6; border-radius: 6px; display: flex; flex-direction: column; gap: 8px">
+              <div style="font-family: 'Newsreader', Georgia, serif; font-size: 20px; font-weight: 700">{{it.title}}</div>
+              <div style="font-size: 14px; color: #5E5648">{{it.meta}}</div>
+              <div style="font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #5E5648; margin-top: 4px">Komentar pembaca</div>
+              <sc-for list="{{it.comments}}" as="c" hint-placeholder-count="2">
+                <div style="{{c.style}}"><b>{{c.who}}</b> {{c.text}}</div>
+              </sc-for>
+            </div>
+          </sc-for>
+          <sc-if value="{{noTerbit}}" hint-placeholder-val="{{ true }}">
+            <div style="font-size: 15px; color: #5E5648">Belum ada berita yang tayang.</div>
+          </sc-if>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+
+  <!-- Notifikasi email -->
+  <sc-if value="{{hasNotice}}" hint-placeholder-val="{{ true }}">
+    <div style="{{noticeStyle}}">
+      <div style="font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #1F4E79">Email baru</div>
+      <div style="display: flex; gap: 10px; align-items: center"><sc-if value="{{nvBapak}}" hint-placeholder-val="{{ true }}"><div style="width: 40px; height: 40px; flex-shrink: 0; border-radius: 50%; overflow: hidden; background: #DCE8F4"><svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true"><path d="M8 66 C10 51 20 47 32 47 C44 47 54 51 56 66 Z" fill="#2F5D7C"></path><path d="M14 58 L20 52 M24 60 L28 54 M40 56 L44 52 M46 60 L50 55" stroke="#A9C3D6" stroke-width="2" stroke-linecap="round"></path><rect x="27" y="38" width="10" height="10" rx="3" fill="#A56D42"></rect><ellipse cx="32" cy="30" rx="12" ry="13.5" fill="#B87A4B"></ellipse><path d="M20.3 23 Q19.4 28 21 32 M43.7 23 Q44.6 28 43 32" stroke="#C9C3BA" stroke-width="3" fill="none" stroke-linecap="round"></path><path d="M19.6 21.5 L21 12.5 Q32 9.5 43 12.5 L44.4 21.5 Q32 18.6 19.6 21.5 Z" fill="#1D1A15"></path><circle cx="26.5" cy="29.5" r="1.4" fill="#2B2620"></circle><circle cx="37.5" cy="29.5" r="1.4" fill="#2B2620"></circle><path d="M23 24.6 Q26.5 23 30 24.6 M34 24.6 Q37.5 23 41 24.6" stroke="#3A342E" stroke-width="1.5" fill="none" stroke-linecap="round"></path><path d="M27.5 36 Q32 39.6 36.5 36" stroke="#6B3A2A" stroke-width="1.7" fill="none" stroke-linecap="round"></path><path d="M26.8 34.6 Q32 32.2 37.2 34.6" stroke="#D8D2C8" stroke-width="2.6" fill="none" stroke-linecap="round"></path></svg></div></sc-if><sc-if value="{{nvDinkes}}" hint-placeholder-val="{{ false }}"><div style="width: 40px; height: 40px; flex-shrink: 0; border-radius: 50%; overflow: hidden; background: #E4EEDF"><svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true"><path d="M12 66 C10 44 15 14 32 11 C49 14 54 44 52 66 Z" fill="#3E7C6B"></path><path d="M20 44 Q32 52 44 44" stroke="#35695B" stroke-width="2" fill="none"></path><ellipse cx="32" cy="30" rx="10.8" ry="12.6" fill="#C99064"></ellipse><path d="M21.5 25 Q24 16 32 16 Q40 16 42.5 25 Q38 20 32 20 Q26 20 21.5 25 Z" fill="#35695B"></path><circle cx="26.5" cy="29.6" r="1.6" fill="#2B2620"></circle><circle cx="37.5" cy="29.6" r="1.6" fill="#2B2620"></circle><path d="M23 25.2 Q26 24 29.6 22.6 M34.4 22.6 Q38 24 41 25.2" stroke="#3A342E" stroke-width="1.5" fill="none" stroke-linecap="round"></path><ellipse cx="32" cy="37.2" rx="2.1" ry="1.7" fill="#6B3A2A"></ellipse><path d="M45 19 Q47.4 23.4 45 25 Q42.6 23.4 45 19 Z" fill="#8FC1E3"></path></svg></div></sc-if><sc-if value="{{nvDisdik}}" hint-placeholder-val="{{ false }}"><div style="width: 40px; height: 40px; flex-shrink: 0; border-radius: 50%; overflow: hidden; background: #EAF1F8"><svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true"><path d="M8 66 C10 51 20 47 32 47 C44 47 54 51 56 66 Z" fill="#9C8A5E"></path><path d="M27 47 L32 53 L37 47" fill="none" stroke="#7D6E47" stroke-width="2"></path><rect x="27" y="38" width="10" height="10" rx="3" fill="#BC8D68"></rect><ellipse cx="32" cy="29.5" rx="12" ry="13.5" fill="#D0A07A"></ellipse><path d="M20 26 C19 15 26 12 32 12 C39 12 45 15 44 26 C41 20 36 18 32 18 C27 18 23 20 20 26 Z" fill="#22201D"></path><circle cx="26.5" cy="29.8" r="1.4" fill="#2B2620"></circle><circle cx="37.5" cy="29.8" r="1.4" fill="#2B2620"></circle><path d="M23 23.8 L29.8 25.8 M34.2 25.8 L41 23.8" stroke="#2B2620" stroke-width="1.7" fill="none" stroke-linecap="round"></path><path d="M28 37.4 H36" stroke="#6B3A2A" stroke-width="1.8" stroke-linecap="round"></path><rect x="22.6" y="26.4" width="7.8" height="6" rx="1.5" fill="none" stroke="#2B2620" stroke-width="1.3"></rect><rect x="33.6" y="26.4" width="7.8" height="6" rx="1.5" fill="none" stroke="#2B2620" stroke-width="1.3"></rect><path d="M30.4 29.4 H33.6" stroke="#2B2620" stroke-width="1.3"></path></svg></div></sc-if><sc-if value="{{nvDishub}}" hint-placeholder-val="{{ false }}"><div style="width: 40px; height: 40px; flex-shrink: 0; border-radius: 50%; overflow: hidden; background: #E8E4F0"><svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true"><path d="M8 66 C10 51 20 47 32 47 C44 47 54 51 56 66 Z" fill="#3D5A80"></path><rect x="38" y="54" width="8" height="4" rx="1" fill="#F2D19B"></rect><rect x="27" y="38" width="10" height="10" rx="3" fill="#94613D"></rect><ellipse cx="32" cy="30" rx="12" ry="13.5" fill="#A8714A"></ellipse><path d="M19 22 Q20 11 32 11 Q44 11 45 22 Z" fill="#3D5A80"></path><path d="M17 22 H47" stroke="#2C4460" stroke-width="3" stroke-linecap="round"></path><circle cx="26.5" cy="29.8" r="1.4" fill="#2B2620"></circle><circle cx="37.5" cy="29.8" r="1.4" fill="#2B2620"></circle><path d="M23 23.8 L29.8 25.8 M34.2 25.8 L41 23.8" stroke="#2B2620" stroke-width="1.7" fill="none" stroke-linecap="round"></path><path d="M28 37.4 H36" stroke="#6B3A2A" stroke-width="1.8" stroke-linecap="round"></path></svg></div></sc-if><div style="display: flex; flex-direction: column; gap: 2px"><div style="font-size: 13px; color: #5E5648">{{noticeFrom}}</div>
+      <div style="font-size: 15px; font-weight: 700">{{noticeSubject}}</div></div></div>
+      <div style="display: flex; gap: 8px">
+        <button type="button" onClick="{{readNotice}}" style="min-height: 40px; padding: 0 16px; background: #1F4E79; color: #FFFFFF; border: none; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer">Baca</button>
+        <button type="button" onClick="{{dismissNotice}}" style="min-height: 40px; padding: 0 16px; background: transparent; color: #1D1A15; border: 1px solid #9C8A63; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer">Nanti</button>
+      </div>
+    </div>
+  </sc-if>
+
+
+  <!-- Tutorial Bu Ratih -->
+  <sc-if value="{{hasTut}}" hint-placeholder-val="{{ true }}">
+    <div style="{{tutStyle}}">
+      <div style="display: flex; gap: 12px; align-items: flex-start">
+        <sc-if value="{{tutRamah}}" hint-placeholder-val="{{ true }}"><div style="width: 48px; height: 48px; flex-shrink: 0; border-radius: 50%; overflow: hidden; background: #F2D19B"><svg width="48" height="48" viewBox="0 0 64 64" aria-hidden="true"><path d="M14 33 C12 16 22 9 32 9 C42 9 52 16 50 33 L50 41 C46 43 44 41 44 37 L20 37 C20 41 18 43 14 41 Z" fill="#4A4540"></path><path d="M8 66 C10 51 20 47 32 47 C44 47 54 51 56 66 Z" fill="#7A3B1E"></path><path d="M26 47 L32 54 L38 47" fill="none" stroke="#E6C9A8" stroke-width="2"></path><rect x="27" y="38" width="10" height="10" rx="3" fill="#B97E55"></rect><ellipse cx="32" cy="29" rx="12.5" ry="14" fill="#C98E62"></ellipse><path d="M19 27 C20 16 28 13 34 14 C40 15 45 19 45 27 C40 22 32 20 26 21 C23 22 21 24 19 27 Z" fill="#4A4540"></path><path d="M30 14.5 C33 15.5 36 17.5 38 21.5" stroke="#AFA89F" stroke-width="2" fill="none" stroke-linecap="round"></path><circle cx="26.5" cy="29.5" r="1.4" fill="#2B2620"></circle><circle cx="37.5" cy="29.5" r="1.4" fill="#2B2620"></circle><path d="M23 24.6 Q26.5 23 30 24.6 M34 24.6 Q37.5 23 41 24.6" stroke="#3A342E" stroke-width="1.5" fill="none" stroke-linecap="round"></path><path d="M27.5 36 Q32 39.6 36.5 36" stroke="#6B3A2A" stroke-width="1.7" fill="none" stroke-linecap="round"></path><circle cx="26.5" cy="29.5" r="4.3" fill="none" stroke="#2B2620" stroke-width="1.3"></circle><circle cx="37.5" cy="29.5" r="4.3" fill="none" stroke="#2B2620" stroke-width="1.3"></circle><path d="M30.8 29.5 H33.2" stroke="#2B2620" stroke-width="1.3"></path></svg></div></sc-if><sc-if value="{{tutCemas}}" hint-placeholder-val="{{ false }}"><div style="width: 48px; height: 48px; flex-shrink: 0; border-radius: 50%; overflow: hidden; background: #F2D19B"><svg width="48" height="48" viewBox="0 0 64 64" aria-hidden="true"><path d="M14 33 C12 16 22 9 32 9 C42 9 52 16 50 33 L50 41 C46 43 44 41 44 37 L20 37 C20 41 18 43 14 41 Z" fill="#4A4540"></path><path d="M8 66 C10 51 20 47 32 47 C44 47 54 51 56 66 Z" fill="#7A3B1E"></path><path d="M26 47 L32 54 L38 47" fill="none" stroke="#E6C9A8" stroke-width="2"></path><rect x="27" y="38" width="10" height="10" rx="3" fill="#B97E55"></rect><ellipse cx="32" cy="29" rx="12.5" ry="14" fill="#C98E62"></ellipse><path d="M19 27 C20 16 28 13 34 14 C40 15 45 19 45 27 C40 22 32 20 26 21 C23 22 21 24 19 27 Z" fill="#4A4540"></path><path d="M30 14.5 C33 15.5 36 17.5 38 21.5" stroke="#AFA89F" stroke-width="2" fill="none" stroke-linecap="round"></path><circle cx="26.5" cy="29.6" r="1.6" fill="#2B2620"></circle><circle cx="37.5" cy="29.6" r="1.6" fill="#2B2620"></circle><path d="M23 25.2 Q26 24 29.6 22.6 M34.4 22.6 Q38 24 41 25.2" stroke="#3A342E" stroke-width="1.5" fill="none" stroke-linecap="round"></path><ellipse cx="32" cy="37.2" rx="2.1" ry="1.7" fill="#6B3A2A"></ellipse><path d="M45 19 Q47.4 23.4 45 25 Q42.6 23.4 45 19 Z" fill="#8FC1E3"></path><circle cx="26.5" cy="29.5" r="4.3" fill="none" stroke="#2B2620" stroke-width="1.3"></circle><circle cx="37.5" cy="29.5" r="4.3" fill="none" stroke="#2B2620" stroke-width="1.3"></circle><path d="M30.8 29.5 H33.2" stroke="#2B2620" stroke-width="1.3"></path></svg></div></sc-if><sc-if value="{{tutKecewa}}" hint-placeholder-val="{{ false }}"><div style="width: 48px; height: 48px; flex-shrink: 0; border-radius: 50%; overflow: hidden; background: #F2D19B"><svg width="48" height="48" viewBox="0 0 64 64" aria-hidden="true"><path d="M14 33 C12 16 22 9 32 9 C42 9 52 16 50 33 L50 41 C46 43 44 41 44 37 L20 37 C20 41 18 43 14 41 Z" fill="#4A4540"></path><path d="M8 66 C10 51 20 47 32 47 C44 47 54 51 56 66 Z" fill="#7A3B1E"></path><path d="M26 47 L32 54 L38 47" fill="none" stroke="#E6C9A8" stroke-width="2"></path><rect x="27" y="38" width="10" height="10" rx="3" fill="#B97E55"></rect><ellipse cx="32" cy="29" rx="12.5" ry="14" fill="#C98E62"></ellipse><path d="M19 27 C20 16 28 13 34 14 C40 15 45 19 45 27 C40 22 32 20 26 21 C23 22 21 24 19 27 Z" fill="#4A4540"></path><path d="M30 14.5 C33 15.5 36 17.5 38 21.5" stroke="#AFA89F" stroke-width="2" fill="none" stroke-linecap="round"></path><path d="M24.6 30 H28.6 M35.4 30 H39.4" stroke="#2B2620" stroke-width="1.6" stroke-linecap="round"></path><path d="M23 24 L29.8 25.4 M34.2 25.4 L41 24" stroke="#3A342E" stroke-width="1.5" fill="none" stroke-linecap="round"></path><path d="M28 38.2 Q32 35.4 36 38.2" stroke="#6B3A2A" stroke-width="1.7" fill="none" stroke-linecap="round"></path><circle cx="26.5" cy="29.5" r="4.3" fill="none" stroke="#2B2620" stroke-width="1.3"></circle><circle cx="37.5" cy="29.5" r="4.3" fill="none" stroke="#2B2620" stroke-width="1.3"></circle><path d="M30.8 29.5 H33.2" stroke="#2B2620" stroke-width="1.3"></path></svg></div></sc-if><sc-if value="{{tutBangga}}" hint-placeholder-val="{{ false }}"><div style="width: 48px; height: 48px; flex-shrink: 0; border-radius: 50%; overflow: hidden; background: #F2D19B"><svg width="48" height="48" viewBox="0 0 64 64" aria-hidden="true"><path d="M14 33 C12 16 22 9 32 9 C42 9 52 16 50 33 L50 41 C46 43 44 41 44 37 L20 37 C20 41 18 43 14 41 Z" fill="#4A4540"></path><path d="M8 66 C10 51 20 47 32 47 C44 47 54 51 56 66 Z" fill="#7A3B1E"></path><path d="M26 47 L32 54 L38 47" fill="none" stroke="#E6C9A8" stroke-width="2"></path><rect x="27" y="38" width="10" height="10" rx="3" fill="#B97E55"></rect><ellipse cx="32" cy="29" rx="12.5" ry="14" fill="#C98E62"></ellipse><path d="M19 27 C20 16 28 13 34 14 C40 15 45 19 45 27 C40 22 32 20 26 21 C23 22 21 24 19 27 Z" fill="#4A4540"></path><path d="M30 14.5 C33 15.5 36 17.5 38 21.5" stroke="#AFA89F" stroke-width="2" fill="none" stroke-linecap="round"></path><path d="M24.6 30.2 Q26.6 27.8 28.6 30.2 M35.4 30.2 Q37.4 27.8 39.4 30.2" stroke="#2B2620" stroke-width="1.6" fill="none" stroke-linecap="round"></path><circle cx="23.5" cy="34" r="2.2" fill="#E3A27C" opacity="0.7"></circle><circle cx="40.5" cy="34" r="2.2" fill="#E3A27C" opacity="0.7"></circle><path d="M23 23.4 Q26.5 21.6 30 23.4 M34 23.4 Q37.5 21.6 41 23.4" stroke="#3A342E" stroke-width="1.5" fill="none" stroke-linecap="round"></path><path d="M27 35.4 Q32 41.4 37 35.4 Z" fill="#6B3A2A"></path><circle cx="26.5" cy="29.5" r="4.3" fill="none" stroke="#2B2620" stroke-width="1.3"></circle><circle cx="37.5" cy="29.5" r="4.3" fill="none" stroke="#2B2620" stroke-width="1.3"></circle><path d="M30.8 29.5 H33.2" stroke="#2B2620" stroke-width="1.3"></path></svg></div></sc-if>
+        <div>
+          <div style="font-size: 12px; font-weight: 700; color: #8F4D10">Bu Ratih · Hari pertama</div>
+          <div style="font-size: 16px; line-height: 1.45">{{tutText}}</div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 8px; justify-content: flex-end">
+        <button type="button" onClick="{{minimizeTut}}" style="{{tutHideStyle}}">Sembunyikan</button>
+        <sc-if value="{{tutHasBtn}}" hint-placeholder-val="{{ true }}">
+          <button type="button" onClick="{{tutNext}}" style="{{tutBtnStyle}}">{{tutBtn}}</button>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+  <sc-if value="{{tutMinimized}}" hint-placeholder-val="{{ false }}">
+    <button type="button" onClick="{{restoreTut}}" aria-label="Tampilkan petunjuk Bu Ratih" style="{{bubbleStyle}}"><div style="width: 46px; height: 46px; flex-shrink: 0; border-radius: 50%; overflow: hidden; background: #F2D19B"><svg width="46" height="46" viewBox="0 0 64 64" aria-hidden="true"><path d="M14 33 C12 16 22 9 32 9 C42 9 52 16 50 33 L50 41 C46 43 44 41 44 37 L20 37 C20 41 18 43 14 41 Z" fill="#4A4540"></path><path d="M8 66 C10 51 20 47 32 47 C44 47 54 51 56 66 Z" fill="#7A3B1E"></path><path d="M26 47 L32 54 L38 47" fill="none" stroke="#E6C9A8" stroke-width="2"></path><rect x="27" y="38" width="10" height="10" rx="3" fill="#B97E55"></rect><ellipse cx="32" cy="29" rx="12.5" ry="14" fill="#C98E62"></ellipse><path d="M19 27 C20 16 28 13 34 14 C40 15 45 19 45 27 C40 22 32 20 26 21 C23 22 21 24 19 27 Z" fill="#4A4540"></path><path d="M30 14.5 C33 15.5 36 17.5 38 21.5" stroke="#AFA89F" stroke-width="2" fill="none" stroke-linecap="round"></path><circle cx="26.5" cy="29.5" r="1.4" fill="#2B2620"></circle><circle cx="37.5" cy="29.5" r="1.4" fill="#2B2620"></circle><path d="M23 24.6 Q26.5 23 30 24.6 M34 24.6 Q37.5 23 41 24.6" stroke="#3A342E" stroke-width="1.5" fill="none" stroke-linecap="round"></path><path d="M27.5 36 Q32 39.6 36.5 36" stroke="#6B3A2A" stroke-width="1.7" fill="none" stroke-linecap="round"></path><circle cx="26.5" cy="29.5" r="4.3" fill="none" stroke="#2B2620" stroke-width="1.3"></circle><circle cx="37.5" cy="29.5" r="4.3" fill="none" stroke="#2B2620" stroke-width="1.3"></circle><path d="M30.8 29.5 H33.2" stroke="#2B2620" stroke-width="1.3"></path></svg></div></button>
+  </sc-if>
+
+  <!-- Penasihat -->
+  <sc-if value="{{hasAdvisor}}" hint-placeholder-val="{{ false }}">
+    <div style="position: absolute; right: 24px; bottom: 24px; width: 420px; background: #FFF8EC; border: 2px solid #8F4D10; border-radius: 10px; box-shadow: 0 10px 28px rgba(29,26,21,0.22); padding: 16px 18px; display: flex; flex-direction: column; gap: 12px">
+      <div style="display: flex; gap: 12px; align-items: flex-start">
+        <sc-if value="{{advCemas}}" hint-placeholder-val="{{ true }}"><div style="width: 48px; height: 48px; flex-shrink: 0; border-radius: 50%; overflow: hidden; background: #F2D19B"><svg width="48" height="48" viewBox="0 0 64 64" aria-hidden="true"><path d="M14 33 C12 16 22 9 32 9 C42 9 52 16 50 33 L50 41 C46 43 44 41 44 37 L20 37 C20 41 18 43 14 41 Z" fill="#4A4540"></path><path d="M8 66 C10 51 20 47 32 47 C44 47 54 51 56 66 Z" fill="#7A3B1E"></path><path d="M26 47 L32 54 L38 47" fill="none" stroke="#E6C9A8" stroke-width="2"></path><rect x="27" y="38" width="10" height="10" rx="3" fill="#B97E55"></rect><ellipse cx="32" cy="29" rx="12.5" ry="14" fill="#C98E62"></ellipse><path d="M19 27 C20 16 28 13 34 14 C40 15 45 19 45 27 C40 22 32 20 26 21 C23 22 21 24 19 27 Z" fill="#4A4540"></path><path d="M30 14.5 C33 15.5 36 17.5 38 21.5" stroke="#AFA89F" stroke-width="2" fill="none" stroke-linecap="round"></path><circle cx="26.5" cy="29.6" r="1.6" fill="#2B2620"></circle><circle cx="37.5" cy="29.6" r="1.6" fill="#2B2620"></circle><path d="M23 25.2 Q26 24 29.6 22.6 M34.4 22.6 Q38 24 41 25.2" stroke="#3A342E" stroke-width="1.5" fill="none" stroke-linecap="round"></path><ellipse cx="32" cy="37.2" rx="2.1" ry="1.7" fill="#6B3A2A"></ellipse><path d="M45 19 Q47.4 23.4 45 25 Q42.6 23.4 45 19 Z" fill="#8FC1E3"></path><circle cx="26.5" cy="29.5" r="4.3" fill="none" stroke="#2B2620" stroke-width="1.3"></circle><circle cx="37.5" cy="29.5" r="4.3" fill="none" stroke="#2B2620" stroke-width="1.3"></circle><path d="M30.8 29.5 H33.2" stroke="#2B2620" stroke-width="1.3"></path></svg></div></sc-if><sc-if value="{{advRamah}}" hint-placeholder-val="{{ false }}"><div style="width: 48px; height: 48px; flex-shrink: 0; border-radius: 50%; overflow: hidden; background: #F2D19B"><svg width="48" height="48" viewBox="0 0 64 64" aria-hidden="true"><path d="M14 33 C12 16 22 9 32 9 C42 9 52 16 50 33 L50 41 C46 43 44 41 44 37 L20 37 C20 41 18 43 14 41 Z" fill="#4A4540"></path><path d="M8 66 C10 51 20 47 32 47 C44 47 54 51 56 66 Z" fill="#7A3B1E"></path><path d="M26 47 L32 54 L38 47" fill="none" stroke="#E6C9A8" stroke-width="2"></path><rect x="27" y="38" width="10" height="10" rx="3" fill="#B97E55"></rect><ellipse cx="32" cy="29" rx="12.5" ry="14" fill="#C98E62"></ellipse><path d="M19 27 C20 16 28 13 34 14 C40 15 45 19 45 27 C40 22 32 20 26 21 C23 22 21 24 19 27 Z" fill="#4A4540"></path><path d="M30 14.5 C33 15.5 36 17.5 38 21.5" stroke="#AFA89F" stroke-width="2" fill="none" stroke-linecap="round"></path><circle cx="26.5" cy="29.5" r="1.4" fill="#2B2620"></circle><circle cx="37.5" cy="29.5" r="1.4" fill="#2B2620"></circle><path d="M23 24.6 Q26.5 23 30 24.6 M34 24.6 Q37.5 23 41 24.6" stroke="#3A342E" stroke-width="1.5" fill="none" stroke-linecap="round"></path><path d="M27.5 36 Q32 39.6 36.5 36" stroke="#6B3A2A" stroke-width="1.7" fill="none" stroke-linecap="round"></path><circle cx="26.5" cy="29.5" r="4.3" fill="none" stroke="#2B2620" stroke-width="1.3"></circle><circle cx="37.5" cy="29.5" r="4.3" fill="none" stroke="#2B2620" stroke-width="1.3"></circle><path d="M30.8 29.5 H33.2" stroke="#2B2620" stroke-width="1.3"></path></svg></div></sc-if>
+        <div>
+          <div style="font-size: 13px; font-weight: 700; color: #8F4D10">Bu Ratih</div>
+          <div style="font-family: 'Newsreader', Georgia, serif; font-size: 18px; line-height: 1.45">“{{advisorText}}”</div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 8px; justify-content: flex-end">
+        <sc-for list="{{advActions}}" as="a" hint-placeholder-count="2">
+          <button type="button" onClick="{{a.run}}" style="{{a.style}}">{{a.label}}</button>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- Toast -->
+  <sc-if value="{{hasToast}}" hint-placeholder-val="{{ false }}">
+    <div style="position: absolute; left: calc(clamp(190px, 16vw, 232px) + 24px); top: 80px; max-width: 700px; background: #1D1A15; color: #FBF8F1; border-radius: 8px; padding: 12px 18px; font-size: 15px; font-weight: 600; box-shadow: 0 8px 24px rgba(29,26,21,0.25)">{{toastText}}</div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = {
+      view: 'inbox', open: null, doc: null, pop: null, split: false,
+      edits: {}, touched: {},
+      status: { N1: 'masuk', N4: 'masuk', N5: 'masuk' },
+      emails: [{ id: 'E0', av: 'bapak', from: 'Bapak', subject: 'Selamat bertugas, Nak', body: 'Nak, hari ini hari pertamamu memegang Warta Sukamaju. Bapak cuma titip satu hal: media yang baik adalah media yang membela kebenaran dan menjaga idealismenya. Kalau ragu, periksa sekali lagi. Bapak bangga padamu.', read: false }],
+      openEmail: null, notice: null, advisor: null, toast: null, kred: 60, trafik: 50,
+      tut: 'welcome', guardUsed: false, tutMin: null, lastOk: true
+    };
+  }
+  renderVals() {
+    const PHONE = false;
+    const s = this.state;
+    const set = (p) => this.setState(p);
+    const CAP = 2;
+    const NASKAH = {
+      N1: { title: 'Kasus DBD di Sukamaju Naik, Dinkes Imbau Warga Lakukan 3M', from: 'Putri Anindya', role: 'Reporter', rubrik: 'Kesehatan', time: '09.12', docs: ['rilis', 'profil'] },
+      N4: { title: 'Pemkot Sukamaju Buka Pendaftaran Beasiswa Mahasiswa hingga 30 Oktober', from: 'Dimas Prakoso', role: 'Reporter', rubrik: 'Kota', time: '09.35', docs: ['siaran'] },
+      N5: { title: 'Jembatan Kali Asri Ditutup Total Mulai Besok', from: 'Agus Wibowo', role: 'Kontributor', rubrik: 'Kota', time: '10.02', docs: ['chat'] }
+    };
+    const HS = {
+      N1: {
+        hari: { prompt: 'Keterangan waktu', correct: 1, options: ['Senin (12/10)', 'Selasa (13/10)', 'Senin (19/10)'] },
+        angka: { prompt: 'Angka kasus September', correct: 0, options: ['87 kasus', '52 kasus', '178 kasus'] },
+        jabatan: { prompt: 'Jabatan narasumber', correct: 1, options: ['Kepala Dinas Kesehatan', 'Sekretaris Dinas Kesehatan', 'Kepala Bidang Pencegahan Penyakit'] }
+      },
+      N4: {
+        kuota: { prompt: 'Jumlah penerima', correct: 0, options: ['500 mahasiswa', '50 mahasiswa', '5.000 mahasiswa'] },
+        nominal: { prompt: 'Besaran bantuan', correct: 0, options: ['Rp6 juta per semester', 'Rp6 juta per tahun', 'Rp600 ribu per semester'] }
+      }
+    };
+    const DOCLABEL = { rilis: 'Rilis Dinkes', profil: 'Profil narasumber', siaran: 'Siaran pers Disdik', chat: 'Chat dengan Dishub' };
+    const sign = (v) => (v > 0 ? '+' + v : '' + v);
+    const short = (t) => (t.length > 34 ? t.slice(0, 34) + '…' : t);
+    const R = PHONE ? '8px' : '6px';
+    const ev = (id, h) => s.edits[id + '.' + h] || 0;
+    const wrongOf = (id) => HS[id] ? Object.keys(HS[id]).filter(h => ev(id, h) !== HS[id][h].correct) : [];
+
+    const fileIds = Object.keys(NASKAH).filter(k => s.status[k] === 'pending');
+    const fileCount = fileIds.length;
+    const showToast = (text) => { clearTimeout(this._t); this._t = setTimeout(() => this.setState({ toast: null }), 4200); return text; };
+
+    const finalize = (id, kind) => {
+      let dK = 0, dT = 0, mail = null;
+      if (id === 'N1') {
+        if (kind === 'publish') {
+          const w = wrongOf('N1');
+          if (!w.length) { dK = 5; dT = 3; }
+          else {
+            dK = -4 * w.length; dT = 3;
+            const L = [];
+            let subject = 'Permintaan koreksi berita DBD';
+            const a = ev('N1', 'angka');
+            if (a === 2) { subject = 'Berita DBD membuat kami dipanggil DPRD'; L.push('Berita Anda menyebut 178 kasus, padahal data kami 87 kasus. Angka itu membuat warga panik, telepon ke puskesmas membeludak, dan siang ini Komisi Kesehatan DPRD Kota Sukamaju memanggil kami untuk klarifikasi.'); dK -= 4; }
+            if (a === 1) L.push('Angka 52 kasus adalah data Agustus. Dengan angka itu kenaikan kasus tidak terlihat, padahal kami sedang mengajak warga waspada.');
+            if (w.includes('hari')) L.push('Jumpa pers berlangsung Selasa (13/10), bukan ' + HS.N1.hari.options[ev('N1', 'hari')] + '.');
+            if (w.includes('jabatan')) L.push('dr. Ratna Kusumawati adalah Sekretaris Dinas Kesehatan, bukan ' + HS.N1.jabatan.options[ev('N1', 'jabatan')] + '.');
+            mail = { id: 'C1', av: 'dinkes', from: 'Humas Dinas Kesehatan Kota Sukamaju', subject, body: 'Dengan hormat, berita Anda hari ini memuat keterangan yang tidak sesuai dengan data kami. ' + L.join(' ') + ' Mohon segera dikoreksi dan kami meminta hak jawab dimuat.', read: false };
+          }
+        } else if (kind === 'pending') dT = -1; else dT = -4;
+      } else if (id === 'N4') {
+        if (kind === 'publish') {
+          const w = wrongOf('N4');
+          if (!w.length) { dK = 3; dT = 4; }
+          else { dK = -4 * w.length; dT = 4; mail = { id: 'C4', av: 'disdik', from: 'Humas Dinas Pendidikan Kota Sukamaju', subject: 'Koreksi berita beasiswa', body: 'Berita Anda soal Beasiswa Sukamaju Cerdas keliru. Siaran pers kami menyebut kuota 500 mahasiswa dengan bantuan Rp6 juta per semester. Banyak mahasiswa bertanya ke kantor kami karena bingung. Mohon segera diralat.', read: false }; }
+        } else if (kind === 'pending') dT = -2; else dT = -4;
+      } else if (id === 'N5') {
+        if (kind === 'publish') { dK = -8; dT = 5; mail = { id: 'C5', av: 'dishub', from: 'Humas Dinas Perhubungan Kota Sukamaju', subject: 'Jadwal penutupan belum final', body: 'Kami belum pernah mengumumkan penutupan Jembatan Kali Asri besok. Banyak warga menelepon kami karena bingung dan sudah telanjur memutar jalan. Mohon beritanya diluruskan.', read: false }; }
+      }
+      const ok = (id === 'N5') ? kind === 'pending' : (kind === 'publish' && wrongOf(id).length === 0);
+      const label = kind === 'publish' ? 'Tayang' : kind === 'pending' ? 'Disimpan ke File' : (s.status[id] === 'pending' ? 'Dibuang dari File' : 'Ditolak');
+      let msg = label + ': “' + short(NASKAH[id].title) + '”';
+      if (dK || dT) msg += '  ·  Kredibilitas ' + sign(dK) + '  ·  Trafik ' + sign(dT);
+      const newStatus = { ...s.status, [id]: kind === 'publish' ? 'terbit' : kind === 'pending' ? 'pending' : 'tolak' };
+      let tut = s.tut;
+      if (tut === 'waitDecision' || tut === 'decide') tut = 'meters';
+      else if (tut === 'done' && Object.keys(newStatus).every(k => newStatus[k] !== 'masuk')) tut = 'end';
+      set({
+        status: newStatus,
+        kred: Math.max(0, Math.min(100, s.kred + dK)), trafik: Math.max(0, Math.min(100, s.trafik + dT)),
+        emails: mail ? [mail, ...s.emails] : s.emails, notice: mail ? mail.id : s.notice,
+        lastOk: ok, toast: showToast(msg), view: s.view === 'file' ? 'file' : 'inbox', open: null, pop: null, advisor: null, split: false, tut
+      });
+    };
+
+    // Pengaman Bu Ratih: hanya untuk kesalahan pertama (level 1-3)
+    const guardText = (id, kind) => {
+      if (id === 'N1' || id === 'N4') {
+        if (kind === 'publish' && wrongOf(id).length) return { text: 'Tunggu dulu. Sebelum tayang, coba cocokkan lagi naskah ini dengan lampirannya. Masih ada yang janggal.', keep: false };
+        if (kind === 'pending') return { text: id === 'N1' ? 'Naskah ini bisa diperbaiki dan tayang hari ini. Tidak perlu ditahan.' : 'Naskah ini sudah rapi dan penting untuk mahasiswa. Kenapa tidak ditayangkan saja?', keep: false };
+        if (kind === 'tolak') return { text: id === 'N1' ? 'Menurutku naskah ini cukup disunting. Sayang kalau informasi DBD tidak sampai ke warga.' : 'Naskah ini sudah rapi dan penting untuk mahasiswa. Kenapa tidak ditayangkan saja?', keep: false };
+      }
+      if (id === 'N5') {
+        if (kind === 'publish') return { text: 'Tunggu. Coba baca lagi chat dengan Dishub di lampiran. Jadwalnya sudah pasti belum?', keep: false };
+        if (kind === 'tolak') return { text: 'Feelingku ini berita penting. Kita simpan dulu saja sambil menunggu kepastian.', keep: true };
+      }
+      return null;
+    };
+    const fullAdvisor = { face: 'ramah', text: 'File kamu penuh. Buang saja berita yang tidak terpakai.', actions: [
+      { label: 'Buka File', primary: true, run: () => set({ advisor: null, view: 'file', open: null, pop: null, split: false }) },
+      { label: 'Nanti saja', run: () => set({ advisor: null }) }
+    ] };
+    const decideFor = (id, kind) => {
+      if (!id) return;
+      if (kind === 'pending' && s.status[id] !== 'pending' && fileCount >= CAP) { set({ advisor: fullAdvisor }); return; }
+      const g = !s.guardUsed ? guardText(id, kind) : null;
+      if (g) {
+        // Kesalahan saat langkah tutorial tidak menghabiskan pengaman
+        const inTutorial = id === 'N1' && (s.tut === 'decide' || s.tut === 'waitDecision');
+        const use = inTutorial ? {} : { guardUsed: true };
+        const already = s.status[id] === 'pending';
+        const actions = g.keep
+          ? [{ label: already ? 'Tetap simpan' : 'Simpan ke File', primary: true, run: () => (already ? set({ advisor: null, ...use }) : fileCount >= CAP ? set({ advisor: fullAdvisor, ...use }) : (this.setState(use), finalize(id, 'pending'))) },
+             { label: already ? 'Tetap buang' : 'Tetap tolak', run: () => { this.setState(use); finalize(id, kind); } }]
+          : [{ label: 'Periksa lagi', primary: true, run: () => set({ advisor: null, ...use }) },
+             { label: 'Tetap lanjut', run: () => { this.setState(use); finalize(id, kind); } }];
+        set({ advisor: { text: g.text, actions, face: 'cemas' } });
+        return;
+      }
+      finalize(id, kind);
+    };
+    const decide = (kind) => () => decideFor(s.open, kind);
+
+    // Tutorial hari 1
+    const TUT = {
+      welcome: { text: 'Selamat datang di hari pertamamu. Aku Bu Ratih, redaktur di sini sejak zaman koran. Hari ini aku temani kamu belajar memakai meja redaksi kita.', btn: 'Lanjut', next: () => set({ tut: 'email', notice: 'E0' }) },
+      email: { text: 'Ada email masuk untukmu. Baca dulu, ya.' },
+      openN1: { text: 'Pesan bapakmu itu pegangan kita semua di sini. Sekarang buka Naskah masuk, lalu pilih berita DBD dari Putri.' },
+      editor: { text: PHONE ? 'Ini editor naskah. Bagian bergaris titik-titik perlu kamu periksa. Bahan pembandingnya ada di tombol Lampiran di atas.' : 'Ini editor naskah. Bagian bergaris titik-titik perlu kamu periksa. Bahan pembandingnya ada di Lampiran di sebelah kanan.', btn: 'Lanjut', next: () => set({ tut: 'tapHari' }) },
+      tapHari: { text: 'Coba klik tanggal di awal berita, lalu cocokkan dengan rilis Dinkes di Lampiran.' },
+      pick: { text: 'Kalau isinya salah, pilih teks penggantinya. Kalau sudah benar, pilih “Sudah benar”. Pilihanmu bisa diubah kapan saja sebelum naskah diputuskan.', btn: 'Lanjut', next: () => set({ tut: 'decide' }) },
+      decide: { text: 'Periksa juga angka dan jabatan narasumbernya. Kalau sudah yakin, tekan Publish. Pending untuk naskah yang perlu ditahan dulu, Tolak untuk naskah yang salah total.', btn: 'Oke', next: () => set({ tut: 'waitDecision' }) },
+      meters: { text: 'Lihat meteran di atas. Setiap keputusan mengubah Kredibilitas dan Trafik. Kalau ada berita keliru yang terbit, pihak yang dirugikan akan mengirim email ke kita.', btn: 'Lanjut', next: () => set({ tut: 'rest' }) },
+      rest: { text: 'Masih ada dua naskah lagi. Salah satunya mungkin belum bisa tayang hari ini. Naskah yang di-pending masuk ke File, tapi slotnya terbatas. Aku percaya kamu bisa.', btn: 'Oke, aku coba', next: () => set({ tut: Object.keys(s.status).every(k => s.status[k] !== 'masuk') ? 'end' : 'done' }) },
+      end: { text: 'Hari pertama selesai. Mulai besok aku hanya akan mengingatkan sesekali. Makin lama, kamu harus makin percaya pada penilaianmu sendiri.', btn: 'Tutup', next: () => set({ tut: 'closed' }) }
+    };
+    const tutAvail = TUT[s.tut] && !s.advisor ? TUT[s.tut] : null;
+    const tutCur = tutAvail && s.tutMin !== s.tut ? tutAvail : null;
+    const tutFace = s.tut === 'end' ? 'bangga' : s.tut === 'meters' ? (s.lastOk ? 'bangga' : 'kecewa') : 'ramah';
+
+    // Navigasi
+    const inboxIds = Object.keys(NASKAH).filter(k => s.status[k] === 'masuk');
+    const unread = s.emails.filter(m => !m.read).length;
+    const terbitIds = Object.keys(NASKAH).filter(k => s.status[k] === 'terbit');
+    const go = (v) => () => set({ view: v, open: null, pop: null, openEmail: null, split: false });
+    const navDefs = [
+      { v: 'inbox', label: 'Naskah masuk', short: 'Masuk', count: inboxIds.length ? '' + inboxIds.length : '' },
+      { v: 'file', label: 'File', short: 'File', count: fileCount + '/' + CAP },
+      { v: 'email', label: 'Email', short: 'Email', count: unread ? '' + unread : '' },
+      { v: 'terbit', label: 'Terbit', short: 'Terbit', count: terbitIds.length ? '' + terbitIds.length : '' }
+    ];
+    const curNav = s.view === 'editor' ? (s.status[s.open] === 'pending' ? 'file' : 'inbox') : s.view === 'emailRead' ? 'email' : s.view;
+    const navItems = navDefs.map(n => {
+      const on = curNav === n.v;
+      return {
+        label: n.label, short: n.short, count: n.count, hasCount: !!n.count, pick: go(n.v),
+        style: PHONE
+          ? 'flex: 1; height: 64px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; background: transparent; border: none; border-top: 3px solid ' + (on ? '#1F4E79' : 'transparent') + '; color: ' + (on ? '#1F4E79' : '#5E5648') + '; font-size: 13px; font-weight: ' + (on ? '700' : '600') + '; cursor: pointer;'
+          : 'display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 44px; padding: 0 14px; background: ' + (on ? '#1F4E79' : 'transparent') + '; color: ' + (on ? '#FFFFFF' : '#1D1A15') + '; border: none; border-radius: 6px; font-size: 15px; font-weight: 600; cursor: pointer; text-align: left;',
+        badge: 'font-size: 12px; font-weight: 700; padding: 1px 8px; border-radius: 10px; background: ' + (on && !PHONE ? '#FFFFFF' : '#E6DCC6') + '; color: ' + (on && !PHONE ? '#1F4E79' : '#3F3A31') + ';'
+      };
+    });
+
+    const openNaskah = (id) => () => set({ view: 'editor', open: id, doc: NASKAH[id].docs[0], pop: null, split: false, tut: (s.tut === 'openN1' && id === 'N1') ? 'editor' : s.tut });
+    const inboxItems = inboxIds.map(k => ({ title: NASKAH[k].title, meta: NASKAH[k].from + ' · ' + NASKAH[k].rubrik + ' · ' + NASKAH[k].time, pick: openNaskah(k) }));
+    const fileItems = fileIds.map(k => ({ title: NASKAH[k].title, meta: NASKAH[k].from + ' · ' + (k === 'N5' ? 'Menunggu kepastian jadwal dari Dishub' : 'Ditahan'), canOpen: true, open: openNaskah(k), drop: () => decideFor(k, 'tolak') }));
+    const commentsFor = (k) => {
+      if (k === 'N1') {
+        const w = wrongOf('N1'), a = ev('N1', 'angka');
+        if (!w.length) return [{ who: 'rina_wulan', text: 'Makasih infonya. Langsung kuras bak mandi sore ini.' }, { who: 'pak_harjo', text: 'Puskesmas dekat rumah juga sudah fogging kemarin.' }];
+        const c = [];
+        if (a === 2) c.push({ who: 'ibu_dewi88', text: '178 kasus?! Separah itu? Pemkot ngapain aja?', bad: true }, { who: 'arif.s', text: 'Barusan cek rilis Dinkes, angkanya 87. Media ini asal tulis ya?', bad: true });
+        if (a === 1) c.push({ who: 'arif.s', text: 'Lho, 52 itu data Agustus. Kok naiknya malah nggak kelihatan?', bad: true });
+        if (w.includes('jabatan')) c.push({ who: 'nakes_skj', text: 'dr. Ratna itu sekretaris dinas, bukan kepala dinas. Cek dulu dong.', bad: true });
+        if (w.includes('hari')) c.push({ who: 'wartawan_warga', text: 'Jumpa persnya hari Selasa, saya hadir kok. Kok ditulis lain?', bad: true });
+        return c.slice(0, 3);
+      }
+      if (k === 'N4') {
+        if (!wrongOf('N4').length) return [{ who: 'mhs_kere', text: 'Alhamdulillah, info penting banget. Share ke grup angkatan!' }, { who: 'bunda_nisa', text: 'Semoga anak saya lolos. Terima kasih infonya.' }];
+        return [{ who: 'mhs_kere', text: 'Siaran pers Disdik bilangnya beda. Mana yang benar nih?', bad: true }, { who: 'rizky_ptn', text: 'Jangan bikin mahasiswa berharap palsu dong.', bad: true }];
+      }
+      if (k === 'N5') return [{ who: 'ojol_sukamaju', text: 'Saya sudah muter lewat Jalan Merdeka, ternyata jembatannya masih buka. Rugi bensin.', bad: true }, { who: 'arif.s', text: 'Dishub bilang belum ada jadwal pasti. Ini hoaks?', bad: true }];
+      return [];
+    };
+    const terbitItems = terbitIds.map(k => ({
+      title: NASKAH[k].title, meta: NASKAH[k].rubrik + ' · tayang hari ini',
+      comments: commentsFor(k).map(c => ({ who: '@' + c.who, text: c.text, style: 'padding: 8px 12px; border-radius: ' + R + '; font-size: 14px; line-height: 1.45; background: ' + (c.bad ? '#F6E6E3' : '#EEF3EA') + '; border: 1px solid ' + (c.bad ? '#DDB7B1' : '#C9D8C2') + ';' }))
+    }));
+    const readEmail = (m) => set({ view: 'emailRead', openEmail: m.id, notice: s.notice === m.id ? null : s.notice, open: null, pop: null, split: false, emails: s.emails.map(x => x.id === m.id ? { ...x, read: true } : x), tut: (s.tut === 'email' && m.id === 'E0') ? 'openN1' : s.tut });
+    const emailItems = s.emails.map(m => ({
+      from: m.from, subject: m.subject, pick: () => readEmail(m),
+      isBapak: m.av === 'bapak', isDinkes: m.av === 'dinkes', isDisdik: m.av === 'disdik', isDishub: m.av === 'dishub',
+      style: 'display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; padding: 12px 14px; background: ' + (m.read ? '#FBF8F1' : '#FFFFFF') + '; border: 1px solid #D8CDB6; border-radius: ' + R + '; cursor: pointer; color: #1D1A15;',
+      subjStyle: 'font-size: 15px; font-weight: ' + (m.read ? '500' : '700') + ';'
+    }));
+    const em = s.emails.find(m => m.id === s.openEmail);
+    const nm = s.emails.find(m => m.id === s.notice);
+
+    // Editor
+    const nk = s.open ? NASKAH[s.open] : null;
+    const tap = (h) => () => set({ pop: h, touched: { ...s.touched, [s.open + '.' + h]: true }, tut: (s.tut === 'tapHari' && h === 'hari') ? 'pick' : s.tut });
+    const hsStyle = (id, h) => {
+      const v = ev(id, h);
+      let st = 'font: inherit; color: inherit; border: none; padding: 0 2px; margin: 0; cursor: pointer; border-radius: 2px; ';
+      if (v !== 0) st += 'background: #DCE8F4; border-bottom: 2px solid #1F4E79;';
+      else if (s.touched[id + '.' + h]) st += 'background: transparent; border-bottom: 2px solid #9C8A63;';
+      else st += 'background: transparent; border-bottom: 2px dotted #9C8A63;';
+      if (s.pop === h && s.open === id) st += ' outline: 2px solid #1F4E79; outline-offset: 2px;';
+      return st;
+    };
+    const popH = s.pop && s.open && HS[s.open] ? HS[s.open][s.pop] : null;
+    const popOptions = popH ? popH.options.map((t, i) => {
+      const on = ev(s.open, s.pop) === i;
+      return {
+        t: i === 0 ? 'Sudah benar' : t, sub: i === 0 ? 'Biarkan “' + t + '”' : 'Ganti menjadi ini',
+        pick: () => set({ edits: { ...s.edits, [s.open + '.' + s.pop]: i } }),
+        style: 'display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; min-height: 48px; padding: 8px 12px; background: ' + (on ? '#EAF1F8' : '#FFFFFF') + '; border: ' + (on ? '2px solid #1F4E79' : '1px solid #CDBF9F') + '; border-radius: ' + R + '; color: #1D1A15; cursor: pointer;',
+        dot: 'width: 18px; height: 18px; flex-shrink: 0; border-radius: 50%; box-sizing: border-box; border: ' + (on ? '6px solid #1F4E79' : '2px solid #9C8A63') + '; background: #FFFFFF;'
+      };
+    }) : [];
+    const docTabs = nk ? nk.docs.map(d => {
+      const on = s.doc === d;
+      return { label: DOCLABEL[d], pick: () => set({ doc: d, split: true }), style: 'min-height: 44px; padding: 0 14px; background: ' + (on ? '#1D1A15' : '#FBF8F1') + '; color: ' + (on ? '#FBF8F1' : '#1D1A15') + '; border: 1px solid ' + (on ? '#1D1A15' : '#9C8A63') + '; border-radius: ' + R + '; font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap;' };
+    }) : [];
+    const kred = s.kred, trafik = s.trafik;
+    const bar = (v, c) => 'height: 100%; width: ' + v + '%; background: ' + c + ';';
+    const statusLabel = s.open ? (s.status[s.open] === 'pending' ? 'Di File (pending)' : 'Draf') : '';
+    const adv = s.advisor;
+    const btnStyle = (primary) => (PHONE ? 'flex: 1; ' : '') + 'min-height: 44px; padding: 0 16px; border-radius: ' + R + '; font-size: 14px; font-weight: 700; cursor: pointer; ' + (primary ? 'background: #1F4E79; color: #FFFFFF; border: none;' : 'background: transparent; color: #1D1A15; border: 1px solid #9C8A63;');
+    const advActions = adv ? adv.actions.map(a => ({ label: a.label, run: a.run, style: btnStyle(a.primary) })) : [];
+
+    return {
+      kred, trafik, kredBar: bar(kred, '#F2D19B'), trafikBar: bar(trafik, '#9FC3E3'),
+      navItems, showNav: s.view !== 'editor',
+      isInbox: s.view === 'inbox', isEditor: s.view === 'editor', isFile: s.view === 'file', isEmail: s.view === 'email', isEmailRead: s.view === 'emailRead', isTerbit: s.view === 'terbit',
+      inboxItems, noInbox: inboxItems.length === 0,
+      fileItems, fileCount: fileCount + ' dari ' + CAP + ' slot terpakai', noFile: fileItems.length === 0,
+      terbitItems, noTerbit: terbitItems.length === 0,
+      emailItems, emFrom: em ? em.from : '', emSubject: em ? em.subject : '', emBody: em ? em.body : '', backToEmail: go('email'),
+      hasNotice: !!nm && s.view !== 'emailRead', noticeFrom: nm ? nm.from : '', noticeSubject: nm ? nm.subject : '',
+      noticeStyle: PHONE
+        ? 'position: absolute; left: 12px; right: 12px; ' + (tutCur ? 'bottom: 76px;' : 'top: 84px;') + ' background: #FFFFFF; border: 1px solid #D8CDB6; border-radius: 10px; box-shadow: 0 8px 24px rgba(29,26,21,0.2); padding: 12px 14px; display: flex; flex-direction: column; gap: 6px;'
+        : 'position: absolute; top: 80px; right: 24px; width: 380px; background: #FFFFFF; border: 1px solid #D8CDB6; border-radius: 8px; box-shadow: 0 8px 24px rgba(29,26,21,0.18); padding: 14px 16px; display: flex; flex-direction: column; gap: 8px;',
+      readNotice: () => nm && readEmail(nm),
+      dismissNotice: () => set({ notice: null }),
+      isN1: s.open === 'N1', isN4: s.open === 'N4', isN5: s.open === 'N5',
+      edTitle: nk ? nk.title : '', edFrom: nk ? nk.from + ' · ' + nk.role : '', edRubrik: nk ? nk.rubrik : '', statusLabel,
+      tHari: HS.N1.hari.options[ev('N1', 'hari')], tAngka: HS.N1.angka.options[ev('N1', 'angka')], tJabatan: HS.N1.jabatan.options[ev('N1', 'jabatan')],
+      tKuota: HS.N4.kuota.options[ev('N4', 'kuota')], tNominal: HS.N4.nominal.options[ev('N4', 'nominal')],
+      tapHari: tap('hari'), tapAngka: tap('angka'), tapJabatan: tap('jabatan'), tapKuota: tap('kuota'), tapNominal: tap('nominal'),
+      sHari: hsStyle('N1', 'hari'), sAngka: hsStyle('N1', 'angka'), sJabatan: hsStyle('N1', 'jabatan'), sKuota: hsStyle('N4', 'kuota'), sNominal: hsStyle('N4', 'nominal'),
+      hasPop: !!popH, popPrompt: popH ? popH.prompt : '', popOptions, closePop: () => set({ pop: null }),
+      docTabs, isDocRilis: s.doc === 'rilis', isDocProfil: s.doc === 'profil', isDocSiaran: s.doc === 'siaran', isDocChat: s.doc === 'chat',
+      isSplit: s.split, closeSplit: () => set({ split: false }), openSplit: () => set({ split: true }),
+      backToList: go(s.open && s.status[s.open] === 'pending' ? 'file' : 'inbox'),
+      doPublish: decide('publish'), doPending: decide('pending'), doTolak: decide('tolak'),
+      hasAdvisor: !!adv, advisorText: adv ? adv.text : '', advActions,
+      hasTut: !!tutCur, tutText: tutCur ? tutCur.text : '', tutHasBtn: !!(tutCur && tutCur.btn), tutBtn: tutCur && tutCur.btn ? tutCur.btn : '', tutNext: tutCur && tutCur.next ? tutCur.next : () => {},
+      tutStyle: PHONE
+        ? 'position: absolute; left: 10px; right: 10px; ' + (s.pop ? 'top: 84px;' : (s.view === 'editor' ? 'bottom: 84px;' : 'bottom: 72px;')) + ' background: #FFF8EC; border: 2px solid #8F4D10; border-radius: 12px; box-shadow: 0 8px 22px rgba(29,26,21,0.2); padding: 12px 14px; display: flex; flex-direction: column; gap: 10px;'
+        : 'position: absolute; left: calc(clamp(190px, 16vw, 232px) + 24px); bottom: 24px; width: min(460px, 40vw); background: #FFF8EC; border: 2px solid #8F4D10; border-radius: 10px; box-shadow: 0 10px 28px rgba(29,26,21,0.22); padding: 16px 18px; display: flex; flex-direction: column; gap: 12px;',
+      tutBtnStyle: btnStyle(true), tutHideStyle: btnStyle(false),
+      tutMinimized: !!tutAvail && s.tutMin === s.tut,
+      minimizeTut: () => set({ tutMin: s.tut }), restoreTut: () => set({ tutMin: null }),
+      bubbleStyle: 'position: absolute; right: 14px; bottom: ' + (PHONE ? (s.view === 'editor' ? '88px' : '76px') : '24px') + '; width: 52px; height: 52px; border-radius: 50%; background: #8F4D10; color: #FFFFFF; border: 3px solid #FFF8EC; box-shadow: 0 6px 18px rgba(29,26,21,0.3); font-size: 15px; font-weight: 700; cursor: pointer; padding: 0; display: flex; align-items: center; justify-content: center; overflow: hidden;',
+      hasToast: !!s.toast, toastText: s.toast || '',
+      tutRamah: tutFace === 'ramah', tutCemas: tutFace === 'cemas', tutKecewa: tutFace === 'kecewa', tutBangga: tutFace === 'bangga',
+      advCemas: !!adv && adv.face === 'cemas', advRamah: !!adv && adv.face !== 'cemas',
+      nvBapak: !!nm && nm.av === 'bapak', nvDinkes: !!nm && nm.av === 'dinkes', nvDisdik: !!nm && nm.av === 'disdik', nvDishub: !!nm && nm.av === 'dishub',
+      erBapak: !!em && em.av === 'bapak', erDinkes: !!em && em.av === 'dinkes', erDisdik: !!em && em.av === 'disdik', erDishub: !!em && em.av === 'dishub'
+    };
+  }
+}
+</script>
+</body>
+</html>
