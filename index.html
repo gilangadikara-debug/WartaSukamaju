@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Warta Sukamaju</title>
+<script>
+  (function () {
+    // Pilihan manual lewat alamat: ?versi=pc atau ?versi=hp
+    var pilihan = new URLSearchParams(location.search).get('versi');
+    var pakaiHP;
+    if (pilihan === 'hp') pakaiHP = true;
+    else if (pilihan === 'pc') pakaiHP = false;
+    // Otomatis: layar lebih sempit dari 1000px memakai versi HP
+    else pakaiHP = window.matchMedia('(max-width: 999px)').matches;
+    location.replace(pakaiHP ? 'Phone.dc.html' : 'Main.dc.html');
+  })();
+</script>
+</head>
+<body style="font-family: system-ui, sans-serif; padding: 24px; line-height: 1.5">
+  <p>Membuka Warta Sukamaju…</p>
+  <p>Kalau tidak terbuka otomatis, pilih versinya:
+    <a href="Main.dc.html">versi PC</a> atau <a href="Phone.dc.html">versi HP</a>.</p>
+</body>
+</html>
